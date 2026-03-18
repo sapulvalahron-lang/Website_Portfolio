@@ -5,24 +5,23 @@ menu.onclick = () => {
 nav.classList.toggle("active");
 };
 
-/* smooth scroll */
-document.querySelectorAll('a[href^="#"]').forEach(anchor=>{
-anchor.onclick = function(e){
+/* scroll fix */
+document.querySelectorAll('a[href^="#"]').forEach(link=>{
+link.onclick = e=>{
 e.preventDefault();
-document.querySelector(this.getAttribute("href"))
+document.querySelector(link.getAttribute("href"))
 .scrollIntoView({behavior:"smooth"});
 nav.classList.remove("active");
-}
+};
 });
 
-/* skills animation */
+/* skill animation */
 const bars = document.querySelectorAll(".fill");
-const observer = new IntersectionObserver(entries=>{
-entries.forEach(entry=>{
-if(entry.isIntersecting){
-entry.target.style.width = entry.target.dataset.width;
+const obs = new IntersectionObserver(entries=>{
+entries.forEach(e=>{
+if(e.isIntersecting){
+e.target.style.width = e.target.dataset.width;
 }
 });
 });
-
-bars.forEach(bar=>observer.observe(bar));
+bars.forEach(b=>obs.observe(b));
